@@ -123,7 +123,7 @@ Ops          Docker, Kubernetes, Prometheus, CI, runbooks, deployment docs
 ## GitHub stats
 
 <div align="center">
-  <img src="assets/stats.svg" alt="Animated local GitHub stats" width="100%" />
+  <img src="assets/stats.svg" alt="Animated GitHub stats generated from real GitHub API data" width="100%" />
 </div>
 
 ## Build philosophy
