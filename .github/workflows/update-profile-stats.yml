@@ -1,0 +1,43 @@
+name: update-profile-stats
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts_gen_stats.py
+      - .github/workflows/update-profile-stats.yml
+
+permissions:
+  contents: write
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh
+
+      - name: Generate stats SVG from real GitHub API
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts_gen_stats.py
+
+      - name: Commit updated stats if changed
+        run: |
+          if git diff --quiet assets/stats.svg; then
+            echo "No stats changes"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/stats.svg
+          git commit -m "docs: update generated GitHub profile stats"
+          git push
