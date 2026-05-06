@@ -120,20 +120,16 @@ Ops          Docker, Kubernetes, Prometheus, CI, runbooks, deployment docs
 ```
 
 
-## GitHub signal from real data
+## GitHub stats from real data
 
-These numbers are generated from the GitHub API by a scheduled GitHub Action, then rendered into a local SVG so the profile does not depend on third-party stat image services.
-
-```text
-public repos: 106
-followers: 2
-total stars: 1
-total forks: 0
-top languages: Python, TypeScript, JavaScript, Go
-```
+These cards are generated from the GitHub API by a scheduled GitHub Action, then rendered as local SVG files. They are not fake numbers and they do not depend on third-party stat image services.
 
 <div align="center">
-  <img src="assets/github-real-stats.svg" alt="Real GitHub API stats rendered as local animated SVG" width="100%" />
+  <img src="assets/github-overview-card.svg" alt="GitHub overview stats from real API data" width="49%" />
+  <img src="assets/github-languages-card.svg" alt="Top languages from real GitHub repository data" width="49%" />
+  <br />
+  <br />
+  <img src="assets/github-contribution-card.svg" alt="GitHub contribution graph from real GraphQL data" width="100%" />
 </div>
 
 ## Build philosophy

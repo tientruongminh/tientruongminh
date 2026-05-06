@@ -1,46 +1,62 @@
-import json, subprocess, html
+import json, subprocess, html, datetime
 from collections import Counter
 from pathlib import Path
 
-def gh_json(args):
-    out = subprocess.check_output(['gh'] + args, text=True)
+def gh_json(args, input_text=None):
+    out = subprocess.check_output(['gh'] + args, input=input_text, text=True)
     return json.loads(out)
 
 user = gh_json(['api', 'users/tientruongminh'])
-repos = gh_json(['repo', 'list', 'tientruongminh', '--limit', '100', '--json', 'name,description,isPrivate,stargazerCount,forkCount,primaryLanguage,pushedAt'])
+repos = gh_json(['repo', 'list', 'tientruongminh', '--limit', '100', '--json', 'name,isPrivate,stargazerCount,forkCount,primaryLanguage,pushedAt'])
 public = [r for r in repos if not r.get('isPrivate')]
 langs = Counter((r.get('primaryLanguage') or {}).get('name') or 'Other' for r in public)
 stars = sum(r.get('stargazerCount') or 0 for r in public)
 forks = sum(r.get('forkCount') or 0 for r in public)
 updated = sorted(public, key=lambda r: r.get('pushedAt') or '', reverse=True)[:4]
-top_langs = langs.most_common(5)
-lang_text = ' · '.join(f'{k} {v}' for k, v in top_langs) or 'No language data'
-updated_text = ' · '.join(r['name'] for r in updated)
+top_langs = langs.most_common(6)
 
-def esc(x):
-    return html.escape(str(x), quote=True)
+# real contribution data from GitHub GraphQL
+query = '''query($login:String!){ user(login:$login){ contributionsCollection{ contributionCalendar{ totalContributions weeks{ contributionDays{ contributionCount date } } } } } }'''
+try:
+    contrib = gh_json(['api','graphql','-f','login=tientruongminh','-f',f'query={query}'])
+    calendar = contrib['data']['user']['contributionsCollection']['contributionCalendar']
+    total_contrib = calendar['totalContributions']
+    days = [d for w in calendar['weeks'] for d in w['contributionDays']]
+except Exception:
+    total_contrib = 0
+    days = []
 
-maxc = max([c for _, c in top_langs] or [1])
-colors = ['#34d399', '#38bdf8', '#a78bfa', '#f59e0b', '#fb7185']
-bars = []
-for i, (name, count) in enumerate(top_langs):
-    h = 35 + int(105 * count / maxc)
-    x = 70 + i * 52
-    bars.append(f'<rect class="bar" x="{x}" y="{290-h}" width="28" height="{h}" rx="9" fill="{colors[i % len(colors)]}" style="animation-delay:{i*.18}s"/><text class="k" x="{x-8}" y="318">{esc(name[:6])}</text>')
+def esc(x): return html.escape(str(x), quote=True)
 
-svg = f'''<svg width="1200" height="360" viewBox="0 0 1200 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-<defs><linearGradient id="g" x1="0" y1="0" x2="1200" y2="360"><stop stop-color="#020617"/><stop offset=".55" stop-color="#052e2b"/><stop offset="1" stop-color="#0f172a"/></linearGradient><style>.card{{fill:#07111f;stroke:#164e63}}.h{{font:800 24px ui-sans-serif,system-ui;fill:#f8fafc}}.k{{font:600 12px ui-monospace,monospace;fill:#99f6e4}}.v{{font:800 42px ui-sans-serif,system-ui;fill:#34d399}}.s{{font:600 14px ui-sans-serif,system-ui;fill:#cbd5e1}}.bar{{animation:grow 2.4s ease-out infinite alternate;transform-origin:bottom}}.line{{stroke:#34d399;stroke-width:3;fill:none;stroke-dasharray:700;stroke-dashoffset:700;animation:draw 4s ease-in-out infinite alternate}}.dot{{fill:#38bdf8;animation:pulse 1.8s ease-in-out infinite}}@keyframes grow{{from{{transform:scaleY(.25);opacity:.55}}to{{transform:scaleY(1);opacity:1}}}}@keyframes draw{{to{{stroke-dashoffset:0}}}}@keyframes pulse{{0%,100%{{opacity:.35;r:4}}50%{{opacity:1;r:8}}}}</style></defs>
-<rect width="1200" height="360" rx="30" fill="url(#g)"/>
-<text class="h" x="42" y="52">GitHub signal</text><text class="k" x="42" y="78">real data from GitHub API · generated into local SVG</text>
-<g transform="translate(42 106)"><rect class="card" width="250" height="132" rx="24"/><text class="k" x="24" y="36">PUBLIC REPOS</text><text class="v" x="24" y="92">{user.get('public_repos', len(public))}</text></g>
-<g transform="translate(322 106)"><rect class="card" width="250" height="132" rx="24"/><text class="k" x="24" y="36">FOLLOWERS</text><text class="v" x="24" y="92">{user.get('followers', 0)}</text></g>
-<g transform="translate(602 106)"><rect class="card" width="250" height="132" rx="24"/><text class="k" x="24" y="36">TOTAL STARS</text><text class="v" x="24" y="92">{stars}</text></g>
-<g transform="translate(882 106)"><rect class="card" width="250" height="132" rx="24"/><text class="k" x="24" y="36">TOTAL FORKS</text><text class="v" x="24" y="92">{forks}</text></g>
-<text class="k" x="42" y="268">TOP LANGUAGES BY REPOSITORY COUNT</text>
-{''.join(bars)}
-<path class="line" d="M610 305C680 240 745 270 810 218S925 248 990 190S1080 205 1140 150"/><circle class="dot" cx="610" cy="305" r="5"/><circle class="dot" cx="810" cy="218" r="5" style="animation-delay:.4s"/><circle class="dot" cx="990" cy="190" r="5" style="animation-delay:.8s"/><circle class="dot" cx="1140" cy="150" r="5" style="animation-delay:1.2s"/>
-<text class="s" x="602" y="268">Recent pushes: {esc(updated_text[:70])}</text>
-<text class="k" x="602" y="330">Languages: {esc(lang_text[:88])}</text>
-</svg>'''
-Path('assets/stats.svg').write_text(svg)
-print(json.dumps({'public_repos': user.get('public_repos'), 'followers': user.get('followers'), 'stars': stars, 'forks': forks, 'top_langs': top_langs, 'recent': [r['name'] for r in updated]}, indent=2))
+def write(path, svg): Path(path).write_text(svg)
+
+common = '''<defs><linearGradient id="bg" x1="0" y1="0" x2="100%" y2="100%"><stop stop-color="#020617"/><stop offset="1" stop-color="#0f172a"/></linearGradient><style>.title{font:800 22px ui-sans-serif,system-ui;fill:#34d399}.label{font:600 14px ui-sans-serif,system-ui;fill:#cbd5e1}.value{font:800 28px ui-sans-serif,system-ui;fill:#f8fafc}.mono{font:600 12px ui-monospace,monospace;fill:#99f6e4}.muted{fill:#64748b}.bar{animation:grow 2s ease-out infinite alternate;transform-origin:left}.pulse{animation:pulse 1.8s ease-in-out infinite}@keyframes grow{from{transform:scaleX(.25);opacity:.55}to{transform:scaleX(1);opacity:1}}@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}</style></defs>'''
+
+overview = f'''<svg width="495" height="220" viewBox="0 0 495 220" fill="none" xmlns="http://www.w3.org/2000/svg">{common}<rect width="495" height="220" rx="16" fill="url(#bg)" stroke="#164e63"/><text class="title" x="24" y="38">Tien's GitHub Stats</text><text class="label" x="28" y="78">Public repositories</text><text class="value" x="230" y="80">{user.get('public_repos', len(public))}</text><text class="label" x="28" y="112">Followers</text><text class="value" x="230" y="114">{user.get('followers',0)}</text><text class="label" x="28" y="146">Total stars</text><text class="value" x="230" y="148">{stars}</text><text class="label" x="28" y="180">Total forks</text><text class="value" x="230" y="182">{forks}</text><circle class="pulse" cx="430" cy="52" r="20" fill="#34d399" opacity=".35"/><circle class="pulse" cx="430" cy="52" r="7" fill="#34d399"/></svg>'''
+write('assets/github-overview-card.svg', overview)
+
+maxc=max([c for _,c in top_langs] or [1])
+colors=['#34d399','#38bdf8','#a78bfa','#f59e0b','#fb7185','#22c55e']
+rows=[]
+for i,(name,count) in enumerate(top_langs):
+    y=66+i*24; w=int(260*count/maxc)
+    rows.append(f'<text class="label" x="24" y="{y}">{esc(name)}</text><rect x="150" y="{y-13}" width="{w}" height="10" rx="5" fill="{colors[i%len(colors)]}" class="bar"/><text class="mono" x="425" y="{y}">{count}</text>')
+langsvg=f'''<svg width="495" height="220" viewBox="0 0 495 220" fill="none" xmlns="http://www.w3.org/2000/svg">{common}<rect width="495" height="220" rx="16" fill="url(#bg)" stroke="#164e63"/><text class="title" x="24" y="38">Most Used Languages</text>{''.join(rows)}<text class="mono" x="24" y="202">by repository primary language, from GitHub API</text></svg>'''
+write('assets/github-languages-card.svg', langsvg)
+
+# contribution graph last ~98 days for compact card
+last_days=days[-98:] if days else []
+mx=max([d['contributionCount'] for d in last_days] or [1])
+cells=[]
+for idx,d in enumerate(last_days):
+    col=idx//7; row=idx%7; x=24+col*17; y=70+row*15; c=d['contributionCount']
+    if c==0: color='#0f172a'
+    elif c < mx*.25: color='#064e3b'
+    elif c < mx*.55: color='#059669'
+    elif c < mx*.85: color='#34d399'
+    else: color='#a7f3d0'
+    cells.append(f'<rect x="{x}" y="{y}" width="11" height="11" rx="3" fill="{color}"/>')
+contribsvg=f'''<svg width="1000" height="230" viewBox="0 0 1000 230" fill="none" xmlns="http://www.w3.org/2000/svg">{common}<rect width="1000" height="230" rx="18" fill="url(#bg)" stroke="#164e63"/><text class="title" x="28" y="42">Contribution Activity</text><text class="value" x="760" y="44">{total_contrib}</text><text class="label" x="830" y="42">contributions this year</text>{''.join(cells)}<text class="mono" x="28" y="202">real contribution calendar from GitHub GraphQL</text><text class="mono" x="700" y="202">recent: {esc(' · '.join(r['name'] for r in updated)[:45])}</text></svg>'''
+write('assets/github-contribution-card.svg', contribsvg)
+
+print(json.dumps({'public_repos':user.get('public_repos'), 'followers':user.get('followers'), 'stars':stars, 'forks':forks, 'total_contributions':total_contrib, 'top_langs':top_langs}, indent=2))
