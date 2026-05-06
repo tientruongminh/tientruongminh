@@ -1,16 +1,15 @@
 <div align="center">
-
-# Tien Truong Minh
-
-### HCMUS Data Science student · AI Engineering at Amoiq · AI systems builder
-
-<a href="https://github.com/tientruongminh/rf-worldpose"><img src="https://img.shields.io/badge/featured-RF--WorldPose-10b981?style=for-the-badge&labelColor=111827" alt="RF-WorldPose" /></a>
-<a href="https://github.com/tientruongminh/omi_FE"><img src="https://img.shields.io/badge/product-OmiLearn-38bdf8?style=for-the-badge&labelColor=111827" alt="OmiLearn" /></a>
-<a href="https://github.com/tientruongminh/nanobot_mod_by_MTCD"><img src="https://img.shields.io/badge/agent-Nanobot-a78bfa?style=for-the-badge&labelColor=111827" alt="Nanobot" /></a>
-
+  <img src="assets/hero.svg" alt="Animated hero for Tien Truong Minh" width="100%" />
 </div>
 
----
+<div align="center">
+
+[![RF-WorldPose](https://img.shields.io/badge/featured-RF--WorldPose-10b981?style=for-the-badge&labelColor=111827)](https://github.com/tientruongminh/rf-worldpose)
+[![OmiLearn](https://img.shields.io/badge/product-OmiLearn-38bdf8?style=for-the-badge&labelColor=111827)](https://github.com/tientruongminh/omi_FE)
+[![Nanobot](https://img.shields.io/badge/agent-Nanobot-a78bfa?style=for-the-badge&labelColor=111827)](https://github.com/tientruongminh/nanobot_mod_by_MTCD)
+[![Amoiq](https://img.shields.io/badge/Amoiq-AI%20Engineering-f59e0b?style=for-the-badge&labelColor=111827)](#)
+
+</div>
 
 ## About me
 
@@ -20,11 +19,9 @@ I like building AI systems that go beyond demos: agent runtimes, search orchestr
 
 My current direction is clear: **turn research ideas into clean, production-oriented systems**.
 
-```text
-idea -> architecture -> prototype -> platform -> feedback -> stronger platform
-```
-
----
+<div align="center">
+  <img src="assets/waves.svg" alt="Animated build philosophy wave" width="100%" />
+</div>
 
 ## What I build
 
@@ -36,8 +33,6 @@ idea -> architecture -> prototype -> platform -> feedback -> stronger platform
 
 I work on agent runtimes, skill systems, retrieval/search workflows, tool calling, memory, scheduling, and automation.
 
-Relevant repos:
-
 - [`nanobot_mod_by_MTCD`](https://github.com/tientruongminh/nanobot_mod_by_MTCD) — ultra-lightweight personal AI assistant direction
 - [`Memento-Skills`](https://github.com/tientruongminh/Memento-Skills) — agent skill design and reusable capabilities
 - [`agent_search`](https://github.com/tientruongminh/agent_search) — production-oriented agentic search baseline
@@ -48,8 +43,6 @@ Relevant repos:
 ### Product interfaces and learning tools
 
 I like visual systems: infinite canvas, graph learning, editor UX, AI chat in context, dashboards, and workflows that feel like products.
-
-Relevant repos:
 
 - [`omi_FE`](https://github.com/tientruongminh/omi_FE) — OmiLearn intelligent learning platform
 - [`velo-editor`](https://github.com/tientruongminh/velo-editor) — AI coding editor direction
@@ -64,8 +57,6 @@ Relevant repos:
 
 I am interested in ML systems that include data contracts, dataset versions, evaluation gates, model packaging, deployment paths, and operating docs.
 
-Relevant repos:
-
 - [`rf-worldpose`](https://github.com/tientruongminh/rf-worldpose) — WiFi CSI sensing platform
 - [`RuView`](https://github.com/tientruongminh/RuView) — WiFi DensePose / RF sensing direction
 - [`wifi_depose_by_cd`](https://github.com/tientruongminh/wifi_depose_by_cd) — WiFi pose research work
@@ -77,8 +68,6 @@ Relevant repos:
 
 I care about the parts that make systems survive: APIs, workers, queues, databases, object storage, monitoring, Docker, Kubernetes, CI, runbooks, and rollback paths.
 
-Stack I often touch:
-
 - Python, FastAPI, PyTorch
 - Rust, Tokio, Go
 - TypeScript, Next.js, React
@@ -88,8 +77,6 @@ Stack I often touch:
 </td>
 </tr>
 </table>
-
----
 
 ## Selected repositories
 
@@ -102,11 +89,11 @@ Stack I often touch:
 | [`velo-editor`](https://github.com/tientruongminh/velo-editor) | AI coding editor direction inspired by open-source Cursor alternatives | TypeScript, editor UX, codebase agents, checkpoints, local/provider model flexibility |
 | [`flowboard`](https://github.com/tientruongminh/flowboard) | Infinite canvas for AI product videos; visual node workflow for product, scene, model, and video generation | Python, AI workflow orchestration, canvas/product tooling |
 
----
-
 ## Current deep build: RF-WorldPose
 
-RF-WorldPose is the project that best represents how I like to build: hardware, networking, data engineering, ML research, distributed training, model serving, security, docs, and operations in one architecture.
+<div align="center">
+  <img src="assets/pipeline.svg" alt="Animated RF-WorldPose pipeline" width="100%" />
+</div>
 
 ```text
 ESP32-S3 CSI nodes
@@ -122,10 +109,6 @@ ESP32-S3 CSI nodes
                               -> ONNX edge inference / Triton cloud serving
 ```
 
-The goal is to treat RF sensing like a serious ML platform, not a notebook-only experiment.
-
----
-
 ## Toolbox
 
 ```text
@@ -136,16 +119,8 @@ Frontend     Next.js, React, TypeScript, Tailwind, infinite canvas, dashboards
 Ops          Docker, Kubernetes, Prometheus, CI, runbooks, deployment docs
 ```
 
----
-
 ## Build philosophy
 
 > Good AI products are not just prompts. They are data contracts, feedback loops, product surfaces, infrastructure, and reliability work hidden behind a simple experience.
 
 I am still a student, but I want my projects to look and feel like serious engineering work: readable architecture, runnable commands, useful abstractions, clean docs, and enough polish that another engineer can understand the system without asking me to explain every file.
-
-<div align="center">
-
-**Research idea -> clean architecture -> useful system -> product-grade iteration**
-
-</div>
