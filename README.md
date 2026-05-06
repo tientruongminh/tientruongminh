@@ -123,20 +123,7 @@ Ops          Docker, Kubernetes, Prometheus, CI, runbooks, deployment docs
 ## GitHub stats
 
 <div align="center">
-
-<img height="170" src="https://github-readme-stats.vercel.app/api?username=tientruongminh&show_icons=true&theme=tokyonight&hide_border=true&bg_color=020617&title_color=34d399&icon_color=38bdf8&text_color=e5e7eb&rank_icon=github" alt="Tien Truong Minh GitHub stats" />
-<img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=tientruongminh&layout=compact&langs_count=8&theme=tokyonight&hide_border=true&bg_color=020617&title_color=34d399&text_color=e5e7eb" alt="Tien Truong Minh top languages" />
-
-<br />
-<br />
-
-<img width="96%" src="https://github-readme-activity-graph.vercel.app/graph?username=tientruongminh&bg_color=020617&color=e5e7eb&line=34d399&point=38bdf8&area=true&hide_border=true&custom_title=Contribution%20Activity" alt="Tien Truong Minh contribution graph" />
-
-<br />
-<br />
-
-<img src="https://github-profile-trophy.vercel.app/?username=tientruongminh&theme=tokyonight&no-frame=true&no-bg=true&margin-w=8&row=1" alt="Tien Truong Minh GitHub trophies" />
-
+  <img src="assets/stats.svg" alt="Animated local GitHub stats" width="100%" />
 </div>
 
 ## Build philosophy
