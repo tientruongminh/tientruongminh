@@ -8,7 +8,13 @@
 [![OmiLearn](https://img.shields.io/badge/product-OmiLearn-38bdf8?style=for-the-badge&labelColor=111827)](https://github.com/tientruongminh/omi_FE)
 [![Nanobot](https://img.shields.io/badge/agent-Nanobot-a78bfa?style=for-the-badge&labelColor=111827)](https://github.com/tientruongminh/nanobot_mod_by_MTCD)
 [![Amoiq](https://img.shields.io/badge/Amoiq-AI%20Engineering-f59e0b?style=for-the-badge&labelColor=111827)](#)
+[![Profile views](https://komarev.com/ghpvc/?username=tientruongminh&style=for-the-badge&color=10b981&label=PROFILE+VIEWS)](https://github.com/tientruongminh)
+[![Repositories](https://img.shields.io/badge/dynamic/json?style=for-the-badge&label=public%20repos&query=public_repos&url=https%3A%2F%2Fapi.github.com%2Fusers%2Ftientruongminh&color=22c55e&labelColor=111827)](https://github.com/tientruongminh?tab=repositories)
 
+</div>
+
+<div align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=120&color=0:0f766e,45:22c55e,75:84cc16,100:facc15&text=AI%20Systems%20%7C%20ML%20Platforms%20%7C%20Product%20Engineering&fontColor=ffffff&fontSize=24&fontAlignY=35&animation=twinkling" alt="AI Systems, ML Platforms, Product Engineering" width="100%" />
 </div>
 
 ## About me
@@ -21,6 +27,50 @@ My current direction is clear: **turn research ideas into clean, production-orie
 
 <div align="center">
   <img src="assets/waves.svg" alt="Animated build philosophy wave" width="100%" />
+</div>
+
+## GitHub command center
+
+<div align="center">
+  <img src="https://github-profile-trophy.vercel.app/?username=tientruongminh&theme=matrix&no-frame=true&no-bg=true&margin-w=8&margin-h=8&column=4&rank=-%3F,-C" alt="GitHub trophies" width="100%" />
+</div>
+
+<table>
+<tr>
+<td width="50%" valign="top">
+  <img src="https://github-readme-stats.vercel.app/api?username=tientruongminh&show_icons=true&count_private=true&include_all_commits=true&rank_icon=github&theme=merko&hide_border=true&bg_color=0d1117&title_color=34d399&icon_color=facc15&text_color=d1fae5" alt="Tien's GitHub stats" width="100%" />
+</td>
+<td width="50%" valign="top">
+  <img src="https://github-readme-streak-stats.herokuapp.com?user=tientruongminh&theme=merko&hide_border=true&background=0D1117&ring=34D399&fire=FACC15&currStreakLabel=A7F3D0&sideLabels=A7F3D0&dates=86EFAC" alt="GitHub streak stats" width="100%" />
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=tientruongminh&layout=compact&langs_count=12&theme=merko&hide_border=true&bg_color=0d1117&title_color=34d399&text_color=d1fae5" alt="Top languages" width="100%" />
+</td>
+<td width="50%" valign="top">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=tientruongminh&theme=github_dark&utcOffset=7" alt="Productive coding time" width="100%" />
+</td>
+</tr>
+</table>
+
+<div align="center">
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=tientruongminh&theme=github-dark&hide_border=true&bg_color=0d1117&color=a7f3d0&line=34d399&point=facc15&area=true&area_color=14532d" alt="GitHub contribution activity graph" width="100%" />
+</div>
+
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-111827?style=for-the-badge&logo=python&logoColor=ffd43b)
+![PyTorch](https://img.shields.io/badge/PyTorch-111827?style=for-the-badge&logo=pytorch&logoColor=ee4c2c)
+![FastAPI](https://img.shields.io/badge/FastAPI-111827?style=for-the-badge&logo=fastapi&logoColor=00d084)
+![Rust](https://img.shields.io/badge/Rust-111827?style=for-the-badge&logo=rust&logoColor=f97316)
+![Go](https://img.shields.io/badge/Go-111827?style=for-the-badge&logo=go&logoColor=38bdf8)
+![TypeScript](https://img.shields.io/badge/TypeScript-111827?style=for-the-badge&logo=typescript&logoColor=60a5fa)
+![Next.js](https://img.shields.io/badge/Next.js-111827?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-111827?style=for-the-badge&logo=docker&logoColor=2496ed)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-111827?style=for-the-badge&logo=kubernetes&logoColor=326ce5)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-111827?style=for-the-badge&logo=postgresql&logoColor=60a5fa)
+
 </div>
 
 ## What I build
@@ -122,7 +172,7 @@ Ops          Docker, Kubernetes, Prometheus, CI, runbooks, deployment docs
 
 ## GitHub stats from real data
 
-These cards are generated from the GitHub API by a scheduled GitHub Action, then rendered as local SVG files. They are not fake numbers and they do not depend on third-party stat image services.
+These local cards are generated from the GitHub API by a scheduled GitHub Action, then rendered as SVG files in this repo. They are kept here as a real-data backup for the live stat widgets above.
 
 <div align="center">
   <img src="assets/github-overview-card.svg" alt="GitHub overview stats from real API data" width="49%" />

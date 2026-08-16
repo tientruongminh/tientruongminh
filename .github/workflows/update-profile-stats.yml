@@ -32,12 +32,12 @@ jobs:
 
       - name: Commit updated stats if changed
         run: |
-          if git diff --quiet assets/stats.svg; then
+          if git diff --quiet assets/github-overview-card.svg assets/github-languages-card.svg assets/github-contribution-card.svg; then
             echo "No stats changes"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/stats.svg
+          git add assets/github-overview-card.svg assets/github-languages-card.svg assets/github-contribution-card.svg
           git commit -m "docs: update generated GitHub profile stats"
           git push
